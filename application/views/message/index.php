@@ -20,7 +20,7 @@
             <?php foreach (explode(',', $m->recipients) as $r) : ?>
                 <a href="mailto:<?= trim($r) ?>"><?= trim($r) ?></a>
             <?php endforeach ?><br>
-            Sent Time : <?= $m->created_at->format('Y-m-d H:i') ?>
+            Sent Time : <?= $m->created_at ?>
 
             <hr>
 

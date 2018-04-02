@@ -30,12 +30,12 @@ class Auth extends MY_Controller {
 					redirect('/login');
 				}
 
-				$this->session->set_userdata([
+				$this->session->set_userdata(array(
 					'logged_in' => true,
 					'user_id' => $user->userid,
 					'username' => $user->username,
 					'email' => $user->email,
-				]);
+				));
 
 				redirect('/home');
 			}
@@ -45,9 +45,9 @@ class Auth extends MY_Controller {
 
 		$this->template = 'templates/login';
 
-		$this->breadcrumbs = [
+		$this->breadcrumbs = array(
 			site_url('login') => 'Login'
-		];
+		);
 
 		$this->render('auth/login');
 	}

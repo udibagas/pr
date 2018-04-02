@@ -25,7 +25,7 @@
                 <td><?= $p->doc_posting_date ?></td>
                 <td><?= $p->doc_status == 'Rejected' ? $p->doc_lastupdate : '' ?></td>
                 <td><?= '' ?></td>
-                <td><?= $p->doc_returndate ? $p->doc_returndate->format('Y-m-d') : '' ?></td>
+                <td><?= $p->doc_returndate ?></td>
                 <td> <?= $p->doc_status ?> </td>
                 <td><?= $p->doc_reason ?></td>
             </tr>

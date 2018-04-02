@@ -59,8 +59,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	{
 		return is_int($this->num_rows)
 			? $this->num_rows
-			// : $this->num_rows = mssql_num_rows($this->result_id);
-			: $this->num_rows = sqlsrv_num_rows($this->result_id);
+			: $this->num_rows = mssql_num_rows($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -165,7 +164,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	protected function _fetch_assoc()
 	{
-		return sqlsrv_fetch_array($this->result_id, SQLSRV_FETCH_ASSOC);
+		return mssql_fetch_assoc($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -180,7 +179,7 @@ class CI_DB_mssql_result extends CI_DB_result {
 	 */
 	protected function _fetch_object($class_name = 'stdClass')
 	{
-		$row = sqlsrv_fetch_object($this->result_id);
+		$row = mssql_fetch_object($this->result_id);
 
 		if ($class_name === 'stdClass' OR ! $row)
 		{

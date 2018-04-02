@@ -35,13 +35,13 @@ class Message extends MY_Controller {
 				$this->load->library('email');
 
 				// TODO: sesuaikan ini
-				$this->email->initialize([
+				$this->email->initialize(array(
 					'protocol' => 'smtp',
 					'smtp_host' => 'ssl://mail.lamsolusi.com',
 					'smtp_port' => 465,
 					'smtp_user' => 'bagas@lamsolusi.com',
 					'smtp_pass' => 'p@ssw0rd',
-				]);
+				));
 
 				// TODO: sesuaikan ini
 				$this->email->from(
@@ -79,7 +79,7 @@ class Message extends MY_Controller {
 		$q = $this->input->get('q');
 		$this->breadcrumbs = array('message' => 'Feedback Histories');
 
-		$this->render('message/index', [
+		$this->render('message/index', array(
 			'messages' => $this->db
 						// tampilkan messages per dokumen
 						->where('doc_no', $this->input->get('doc_no'))
@@ -98,7 +98,7 @@ class Message extends MY_Controller {
 						->order_by('id', 'DESC')
 						->get('messages')
 						->result(),
-		]);
+		));
 
 		// TODO: pagination
 	}

@@ -108,19 +108,9 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	public function db_connect($persistent = FALSE)
 	{
-		$serverName = $this->hostname;
-    	$connectionOptions = array(
-	        "Database" => $this->database,
-	        "UID" => $this->username,
-	        "PWD" => $this->password
-	    );
-
-	    //Establishes the connection
-	    $this->conn_id = sqlsrv_connect($serverName, $connectionOptions);
-
-		// $this->conn_id = ($persistent)
-		// 		? mssql_pconnect($this->hostname, $this->username, $this->password)
-		// 		: mssql_connect($this->hostname, $this->username, $this->password);
+		$this->conn_id = ($persistent)
+				? mssql_pconnect($this->hostname, $this->username, $this->password)
+				: mssql_connect($this->hostname, $this->username, $this->password);
 
 		if ( ! $this->conn_id)
 		{
@@ -158,8 +148,6 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	public function db_select($database = '')
 	{
-		return TRUE;
-
 		if ($database === '')
 		{
 			$database = $this->database;
@@ -187,7 +175,7 @@ class CI_DB_mssql_driver extends CI_DB {
 	 */
 	protected function _execute($sql)
 	{
-		return sqlsrv_query($this->conn_id, $sql);
+		return mssql_query($sql, $this->conn_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -375,13 +363,11 @@ class CI_DB_mssql_driver extends CI_DB {
 		// calls error() once for logging purposes when a query fails.
 		static $error = array('code' => 0, 'message' => NULL);
 
-		// $message = mssql_get_last_message();
-		$message = sqlsrv_errors();
-
-		if ($message)
+		$message = mssql_get_last_message();
+		if ( ! empty($message))
 		{
 			$error['code']    = $this->query('SELECT @@ERROR AS code')->row()->code;
-			$error['message'] = $message[0][0];
+			$error['message'] = $message;
 		}
 
 		return $error;
