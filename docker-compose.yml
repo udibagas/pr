@@ -4,5 +4,3 @@ app:
                 - 8080:80
         volumes:
                 - /home/udibagas/apps/pr:/var/www
-        environment:
-                XDEBUG_CONFIG: "remote_host=172.17.0.1"
