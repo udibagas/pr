@@ -1,18 +1,28 @@
 <script type="text/javascript">
 
-$(function () {
-    "use strict";
+Highcharts.chart('pie', {
 
-    //DONUT CHART
-    var donutChart = new Morris.Donut({
-        element: 'morris-donut-chart',
-        data: [{label: "Download Sales", value: 12},
-            {label: "In-Store Sales", value: 30},
-            {label: "Mail-Order Sales", value: 20}],
-        resize: true,
-        colors: ['#6ac7d2', '#088190', '#00b8ce'],
-    });
+    title: {
+        text: 'PERFORMANCE RECORD'
+    },
 
+    // xAxis: {
+    //     categories: ['Transaction Completed', 'Document Received', 'Document Rejected', 'Document Filed', 'Document Returned']
+    // },
+
+    series: [{
+        type: 'pie',
+        allowPointSelect: true,
+        keys: ['name', 'y', 'selected', 'sliced'],
+        data: [
+            ['Transaction Completed', 29.9, true, true],
+            ['Document Received', 71.5, false],
+            ['Document Rejected', 106.4, false],
+            ['Document Filed', 129.2, false],
+            ['Document Returned', 144.0, false],
+        ],
+        showInLegend: true
+    }]
 });
 
 </script>

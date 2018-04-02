@@ -29,7 +29,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="panel panel-default" style="margin-bottom:0;">
 						<div class="panel-heading clearfix">
 							<h4 class="panel-title">LEGEND</h4>

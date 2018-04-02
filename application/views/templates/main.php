@@ -31,6 +31,9 @@
 
 <link href="<?= base_url('css/mouldifi-forms.css') ?>" rel="stylesheet">
 
+<script src="<?= base_url('hc/code/highcharts.js') ?>"></script>
+<script src="<?= base_url('hc/code/modules/exporting.js') ?>"></script>
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
