@@ -71,54 +71,48 @@ class Message extends MY_Controller {
 			}
 		}
 
-		redirect('performance');
+		redirect($this->input->post('redirect_url'));
 	}
 
 	public function index()
 	{
 		$q = $this->input->get('q');
-		$this->breadcrumbs = array('message' => 'Feedback Histories');
 
-		$this->render('message/index', array(
-			'messages' => $this->db
-						// tampilkan messages per dokumen
-						->where('doc_no', $this->input->get('doc_no'))
-						// message bisa di filter
-						->group_start()
-							->or_like('subject', $q)
-							->or_like('body', $q)
-							->or_like('recipients', $q)
-						->group_end()
-						// hanya tampilkan email dari dan ke user terkait
-						->group_start()
-							->where('sender', $this->session->userdata('user_id'))
-							->or_like('recipients', $this->session->userdata('email'))
-						->group_end()
-						// tampilkan pesan terbaru dahulu
-						->order_by('id', 'DESC')
-						->get('messages')
-						->result(),
-		));
+		$messages = $this->db
+			// tampilkan messages per dokumen
+			->where('doc_no', $this->input->get('doc_no'))
+			// message bisa di filter
+			->group_start()
+				->or_like('sender', $q)
+				->or_like('subject', $q)
+				->or_like('body', $q)
+				->or_like('recipients', $q)
+			->group_end()
+			// hanya tampilkan email dari dan ke user terkait
+			->group_start()
+				->where('sender', $this->session->userdata('user_id'))
+				->or_like('recipients', $this->session->userdata('email'))
+			->group_end()
+			// tampilkan pesan terbaru dahulu
+			->order_by('id', 'DESC')
+			->get('messages')
+			->result();
 
-		// TODO: pagination
+		header("Content-type: application/json");
+		echo json_encode($messages);
+		exit();
 	}
 
 	public function show($id)
 	{
 		$message = $this->message->find($id);
-
-		if (!$message) {
-			redirect('/');
-		}
-
-		$this->render('message/show', array(
-			'message' => $message,
-		));
+		header("Content-type: application/json");
+		echo json_encode($message);
+		exit();
 	}
 
 	public function delete($id)
 	{
 		$this->message->delete($id);
-		redirect($this->input->get('redirect'));
 	}
 }

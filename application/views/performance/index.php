@@ -11,34 +11,55 @@
 <?php endif ?>
 
 <div class="panel panel-default animated">
-	<div class="panel-heading clearfix">
-		<h3 class="panel-title">PERFORMANCE</h3>
-	</div>
 	<div class="panel-body">
 		<div class="tabs-container">
+
 			<ul class="nav nav-tabs">
-				<li class="<?= $object == 'order' ? 'active' : '' ?>"><a href="<?= site_url('performance?object=order') ?>">Order</a></li>
-				<li class="<?= $object == 'good_receipt' ? 'active' : '' ?>"><a href="<?= site_url('performance?object=good_receipt') ?>">Good Receipt</a></li>
+
+				<?php
+				$tabs = array(
+					'order' => 'ORDER',
+					'good_receipt' => 'GOOD RECEIPT',
+					// 'revision' => 'REVISION',
+					// 'notification' => 'NOTIFICATION'
+				);
+				?>
+
+				<?php foreach ($tabs as $k => $v) : ?>
+				<li class="<?= $this->uri->segment(2) == $k ? 'active' : '' ?>">
+					<a href="<?= site_url('home/'.$k) ?>"><?= $v ?></a>
+				</li>
+				<?php endforeach ?>
+
 			</ul>
+
 			<br>
+
 			<div class="tab-content">
 				<div class="tab-pane active">
-					<?php $this->load->view('performance/_search_form', array('object' => $object)) ?>
-					<?php $this->load->view('performance/_'.$object) ?>
+					<?php $this->load->view('performance/_search_form') ?>
+					<div class="panel panel-default panel-body">
+						<?php $this->load->view($view) ?>
+					</div>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-7">
+					<div class="panel panel-default panel-body">
+						<div id="chart" style="height:400px;"> </div>
+					</div>
+				</div>
+				<div class="col-md-5">
 					<div class="panel panel-default" style="margin-bottom:0;">
 						<div class="panel-heading clearfix">
-							<h4 class="panel-title">LEGEND</h4>
+							<h4 class="panel-title">INDICATOR LEGEND</h4>
 						</div>
 						<div class="panel-body">
-							<span class="label label-success">&nbsp;</span> Transaction Complete (YES) and Document Received (YES)<br>
-							<span class="label label-warning">&nbsp;</span> Document Rejected (YES) or Document Returned (YES)<br>
-							<span class="label label-primary">&nbsp;</span> Transaction complete (NO) and Document Received (YES)<br>
-							<span class="label label-danger">&nbsp;</span> Transaction Complete (YES) and Document Received (NO)
+							<span class="badge badge-success">&nbsp;&nbsp;</span> Transaction Complete <span class="text-success">YES</span> <strong>AND</strong> Document Received <span class="text-success">YES</span><br>
+							<span class="badge badge-warning">&nbsp;&nbsp;</span> Document Rejected <span class="text-success">YES</span> <strong>OR</strong> Document Returned <span class="text-success">YES</span><br>
+							<span class="badge badge-primary">&nbsp;&nbsp;</span> Transaction complete <span class="text-danger">NO</span> <strong>AND</strong> Document Received <span class="text-success">YES</span><br>
+							<span class="badge badge-danger">&nbsp;&nbsp;</span> Transaction Complete <span class="text-success">YES</span> <strong>AND</strong> Document Received <span class="text-danger">NO</span>
 						</div>
 					</div>
 				</div>
@@ -47,4 +68,7 @@
 	</div>
 </div>
 
+<!-- untuk modal dialog form feedback -->
 <?php $this->load->view('message/_form') ?>
+<!-- untuk modal dialog feedback histories -->
+<?php $this->load->view('message/index') ?>

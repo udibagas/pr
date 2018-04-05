@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($performance as $p): ?>
+        <?php foreach ($data as $p): ?>
             <tr>
                 <td><?= $p->doc_no ?></td>
                 <td><?= $p->doc_category ?></td>
