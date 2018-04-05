@@ -28,7 +28,7 @@
                     <td><?= $p->transaction_completed ?></td>
                     <td><?= $p->document_received ?></td>
                     <td><?= $p->document_rejected ?></td>
-                    <td></td>
+                    <td><?= $p->document_filed ?></td>
                     <td><?= $p->document_returned ?></td>
                     <td class="text-center">
                         <?php if ($p->transaction_completed &&  $p->document_received): ?>

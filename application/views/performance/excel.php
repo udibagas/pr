@@ -22,10 +22,10 @@
                 <td><?= $p->doc_work_package ?></td>
                 <td><?= $p->doc_aircraft ?></td>
                 <td><?= $p->transaction_completed ?></td>
-                <td><?= $p->doc_posting_date ?></td>
-                <td><?= $p->doc_status == 'Rejected' ? $p->doc_lastupdate : '' ?></td>
-                <td><?= '' ?></td>
-                <td><?= $p->doc_returndate ?></td>
+                <td><?= $p->document_received ?></td>
+                <td><?= $p->document_rejected ?></td>
+                <td><?= $p->document_filed ?></td>
+                <td><?= $p->document_returned ?></td>
                 <td> <?= $p->doc_status ?> </td>
                 <td><?= $p->doc_reason ?></td>
             </tr>

@@ -12,7 +12,7 @@ class Auth extends MY_Controller {
 	public function login()
 	{
 		if ($this->session->userdata('logged_in')) {
-			redirect('/home');
+			redirect('order');
 		}
 
 		if ($data = $this->input->post())
@@ -37,7 +37,7 @@ class Auth extends MY_Controller {
 					'email' => $user->email,
 				));
 
-				redirect('/home');
+				redirect('order');
 			}
 
 			$this->session->set_flashdata('error', 'Username & Password salah.');
@@ -55,6 +55,6 @@ class Auth extends MY_Controller {
 	public function logout()
 	{
 		session_destroy();
-		redirect('/home');
+		redirect('login');
 	}
 }

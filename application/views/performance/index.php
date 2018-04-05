@@ -19,15 +19,15 @@
 				<?php
 				$tabs = array(
 					'order' => 'ORDER',
-					'good_receipt' => 'GOOD RECEIPT',
+					'goodreceipt' => 'GOOD RECEIPT',
 					// 'revision' => 'REVISION',
 					// 'notification' => 'NOTIFICATION'
 				);
 				?>
 
 				<?php foreach ($tabs as $k => $v) : ?>
-				<li class="<?= $this->uri->segment(2) == $k ? 'active' : '' ?>">
-					<a href="<?= site_url('home/'.$k) ?>"><?= $v ?></a>
+				<li class="<?= $this->router->fetch_class() == $k ? 'active' : '' ?>">
+					<a href="<?= site_url($k) ?>"><?= $v ?></a>
 				</li>
 				<?php endforeach ?>
 
